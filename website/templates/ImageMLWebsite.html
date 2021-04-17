@@ -36,62 +36,14 @@
                 <input type = "radio", name = "rating", value = "5" />
             </p>
         </form>
+        <script>
+
+            $(document).ready(function () {
+
+                
+            });
+
+
+        </script>
     </body>
 </html>
-<script>
-
-    $(document).ready(function () {
-
-        $("#loginForm").validate({
-            rules: {
-                username: {
-                    required: true,
-                },
-                password: {
-                    required: true,
-                }
-            },
-            messages: {
-                username: "Please enter a username",
-                password: {
-                    required: "Please provide a password",
-                }
-            },
-            submitHandler: function (form) {
-                callLoginServer(form);
-            }
-        })
-    });
-
-    function callLoginServer(form) {
-
-        var username = form.username.value;
-        var password = form.password.value;
-        var stayLoggedIn = false;
-
-        if (form.stayLoggedIn.checked) {
-            stayLoggedIn = true;
-        } else {
-            stayLoggedIn = false;
-        }
-
-        $.ajax({
-            type: 'POST',
-            url: '/login/userLogin',
-            data: {
-                username: username,
-                password: password,
-                stayLoggedIn: stayLoggedIn
-            }
-        }).done(function (result) {
-            if (result && result.loginMessage) {
-                console.log(result.loginMessage);
-                $('#loginMsg').html(result.loginMessage);
-            } else {
-                top.location.href = '/home';
-            }
-        })
-    }
-
-
-</script>
