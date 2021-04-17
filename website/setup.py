@@ -6,12 +6,13 @@ import tweepy
 
 app = Flask(__name__)
 
-UPLOADS_FOLDER = '/static/uploads/'
+UPLOADS_FOLDER = 'static/uploads/'
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 app.config['SECRET_KEY'] = 'something'
 app.config['UPLOAD_FOLDER'] = UPLOADS_FOLDER
 
+image_path = ""
 
 @app.route('/')
 def image_caption():
@@ -42,18 +43,27 @@ def file_upload():
         return redirect(url_for('uploaded_file', filename=filename))
 
 
-# TODO: write HTML page for after the image is uploaded to show caption with a button to tweet
-# and a button to generate a different caption
 @app.route('/uploaded_file/<filename>')
 def uploaded_file(filename):
-    imagePath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    caption = get_caption(imagePath)
-    return render_template('tweetImage.html', image=imagePath, caption=caption)
+    global image_path
+    image_path = os.path.join('/', app.config['UPLOAD_FOLDER'], filename)
+    caption = get_caption(image_path)
+    return render_template('tweetImage.html', image=image_path, caption=caption)
+
+# TODO: get URL of tweet
+
+
+@app.route('/tweet_confirmation', methods=['POST'])
+def tweet_confirmation():
+    caption = request.form.get('caption')
+    # image = request.form.get('image')
+    tweet(image_path, caption)
+    return render_template('tweetConfirmation.html')
 
 
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 # TODO: figure out how to generate caption with AI model
@@ -68,12 +78,14 @@ def tweet(image, caption):
     auth.set_access_token("2733437449-7tAXSHbYjQJapC9ITqxLmsDtHCcHcwDhL6AJ0Lf",
                           "ih6BSfqlTAV4eYE5MzrzBeqhYXZMkbWSYQ7FclXATKUen")
 
-    imagePath = os.path.join(
-        app.config['UPLOAD_FOLDER'], image)
+    # imagePath = os.path.join(
+    #     app.config['UPLOAD_FOLDER'], image)
     api = tweepy.API(auth)
-    media = api.media_upload(imagePath)  # Image file
+    print(image, caption)
+    image = image[1:]
+    media = api.media_upload(image)  # Image file
 
     post_result = api.update_status(status=caption, media_ids=[media.media_id])
 
-    if os.path.exists(imagePath):
-        os.remove(imagePath)
+    if os.path.exists(image_path):
+        os.remove(image_path)
