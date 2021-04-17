@@ -143,3 +143,4 @@ Flickr8k_Dataset/
 Flickr8k_text.zip
 Flickr8k_text/
 features.pkl
+*.h5
