@@ -3,9 +3,25 @@
 
 <head>
     <style>
-        h3 {text-align: center; font-family: Georgia;}
+        input {
+            text-align: center;
+            font-family: Georgia
+        }
+        button {
+            color: lightgray;
+        }
+        p, div, form, h3 {
+            text-align: center; 
+            font-family: Georgia; 
+            color: #494949;
+        }
+        body {
+            background-color: white;
+        }
         .container {
             position: absolute;
+            background-color: #88e3ff;
+            font-family: Georgia; 
             top: 50%;
             left: 50%;
             -moz-transform: translateX(-50%) translateY(-50%);
@@ -17,12 +33,9 @@
         }
     
     </style>
-
-    <!-- Required meta tags -->
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -30,22 +43,28 @@
 
 <body class = "container">
     <div class="a">
-         <h3>Upload the image to be captioned </h3>
+        <h3>Upload the image to be captioned </h3>
         <form action="/file_upload" , method="post" , enctype="multipart/form-data">
+                <div id = "prompt">
+                    Pick a submit option
+                </div>
+                <br/>
+                File <input type = "radio" name = "fileType" value = "File" onclick = "getFile()" require = "require" />
+                URL <input type = "radio" name = "fileType" value = "URL" onclick = "getUrl()" require = "require" />
                 <br />
-                File <input type="radio" name="fileType" value="File" onclick = "getFile()" />
-                URL <input type="radio" name="fileType" value="URL" onclick = "getURL()" />
                 <br />
+                <div id = "file" style = "display:none" >
+                     <input type = "file" name = "image" />
+                </div>
+                <div id = "url" style = "display:none" >
+                    <input type = "url" size = 25 name = "image" placeholder = "Enter your URL here"/>
+                </div>
                 <br />
-                <input type = "file" id = "file" name = "image" style = "display:none" />
-                <br />
-                <br />
-                <input type="url" id = "url" size = 25 name="image" style = "display:none" />
-        <button type="submit" class="btn btn-outline-dark btn-sm"> Upload </button>
+                <div id = "Upload" style = "display:none" >        
+                    <button type="submit" style = "border-color: black; border:1px" class="btn btn-light btn-sm" > Upload </button>
+                </div>
      </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -60,11 +79,15 @@
 
 <script>
 function getFile() {
-    document.getElementById("file").show()
-    document.getElementById("url").hide()
+    $("#file").show()
+    $("#url").hide()
+    $("#Upload").show()
+    $("#prompt").hide()
 };
 function getUrl() {
-    document.getElementById("url").show()
-    docuemt.getElementById("file").hide()
+    $("#url").show()
+    $("#file").hide()
+    $("#Upload").show()
+    $("#prompt").hide()
 }
 </script>
