@@ -144,3 +144,4 @@ Flickr8k_text.zip
 Flickr8k_text/
 features.pkl
 *.h5
+website/static/uploads/*
