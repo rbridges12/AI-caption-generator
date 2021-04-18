@@ -49,4 +49,14 @@ img {
     position: relative;
     top: 30%;
 }
+.twitter-timeline {
+    position: absolute; 
+    top: 0; 
+    bottom: 0; 
+    left: 0; 
+    margin: auto; 
+    right: 100px; 
+    height: 100%; 
+    width: 100%;
+}
 

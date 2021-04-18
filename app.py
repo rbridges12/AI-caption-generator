@@ -28,7 +28,6 @@ image_path = ""
 
 @app.route('/')
 def image_caption():
-    # tweet("model.png","test image")
     return render_template('ImageMLWebsite.html')
 
 
@@ -90,7 +89,7 @@ def uploaded_file(filename):
     image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     caption = generator.get_caption(image_path)
     caption = caption + " #HackUIowa"
-    caption = caption.replace('in red shirt', '')
+    caption = caption.replace(' in red shirt', '')
     caption = caption.replace('man', 'person')
     captionUpper = caption[0].upper() + caption[1:]
     return render_template('tweetImage.html', image='/'+image_path, caption=captionUpper)
@@ -133,9 +132,10 @@ def tweet(image, caption):
 
     post_result = api.update_status(status=caption, media_ids=[media.media_id])
 
-    if os.path.exists(image_path):
+    try:
         os.remove(image_path)
-    print("Image Path", image_path)
+    except:
+        pass
 
     newUrl = "https://twitter.com/Bot2021U/status/" + str(post_result.id)
     return newUrl
