@@ -28,21 +28,24 @@ def file_upload():
     # check if an image was uploaded
     if 'image' not in request.files:
         flash('No file part')
-        return redirect(request.url)
+        return redirect('/')
     file = request.files['image']
 
     # if user does not select file, browser also
     # submit an empty part without filename
     if file.filename == '':
         flash('No selected file')
-        return redirect(request.url)
+        return redirect('/')
 
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         return redirect(url_for('uploaded_file', filename=filename))
+    
+    flash('Please Select Correct File Type')
+    return redirect('/')
 
-
+# TODO: resize image to fit
 @app.route('/uploaded_file/<filename>')
 def uploaded_file(filename):
     global image_path

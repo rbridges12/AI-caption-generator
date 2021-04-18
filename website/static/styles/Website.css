@@ -1,70 +1,88 @@
-body 
-{
-    background-color: #91e0ff;
-    /* background-image: linear-gradient(deepskyblue, blue, blue);   */
-} 
-html, body
-{
+html, body {
     height: 100%;
     width: 100%;
-}
-h1 {
-    font-family: Georgia;
-    font-size: 32px;
+    background-color: #536162;
+    color: #f3f4ed;
     text-align: center;
-    color: #585858;
-} 
-p {
     font-family: Georgia;
-    font-size: 16px;
+}
+input {
+    background-color: #f3f4ed;
+    color: #536162;
     text-align: center;
-    color: #585858;
-} 
-
-.btn-e {
-    color: lightskyblue;
-    transition: all 0.5s;
-    position: relative;
+    font-family: Georgia;
 }
-
-.btn-e:hover {
-    opacity: 0.5;
+button {
+    background-color: #f3f4ed;
+    color: #536162;
+    text-align: center;
+    font-family: Georgia;
 }
-
-.btn-three {
-    color: lightskyblue;
-    transition: all 0.5s;
-    position: relative;
+p, div, form, h3 {
+    background-color: #536162;
+    color: #f3f4ed;
+    text-align: center;
+    font-family: Georgia;
 }
-
-.btn-three::before {
-    content: '';
-    position: center;
-    z-index: 1;
-    background-color: rgba(255, 255, 255, 0.1);
-    transition: all 0.3s;
-}
-
-.btn-three:hover::before {
-    opacity: 0;
-    transform: scale(0.5, 0.5);
-}
-
-.btn-three::after {
-    content: '';
+.container {
+    background-color: #536162;
+    color: #f3f4ed;
+    text-align: center;
+    font-family: Georgia; 
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    opacity: 0;
-    transition: all 0.3s;
-    border: 1px solid rgba(115, 50, 168, 0.5);
-    transform: scale(1.2, 1.2);
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+.a {
+    position: relative;
+    top: 30%  
 }
 
-.btn-three:hover::after {
-    opacity: 1;
-    transform: scale(1, 1);
+.input-file-container {
+  position: relative;
+  width: 225px;
+} 
+.js .input-file-trigger {
+  display: block;
+  padding: 14px 45px;
+  background: #39D2B4;
+  color: #fff;
+  font-size: 1em;
+  transition: all .4s;
+  cursor: pointer;
+}
+.js .input-file {
+  position: absolute;
+  top: 0; left: 0;
+  width: 225px;
+  opacity: 0;
+  padding: 14px 0;
+  cursor: pointer;
+}
+.js .input-file:hover + .input-file-trigger,
+.js .input-file:focus + .input-file-trigger,
+.js .input-file-trigger:hover,
+.js .input-file-trigger:focus {
+  background: #34495E;
+  color: #39D2B4;
+}
+
+.file-return {
+  margin: 0;
+}
+.file-return:not(:empty) {
+  margin: 1em 0;
+}
+.js .file-return {
+  font-style: italic;
+  font-size: .9em;
+  font-weight: bold;
+}
+.js .file-return:not(:empty):before {
+  content: "Selected file: ";
+  font-style: normal;
+  font-weight: normal;
 }

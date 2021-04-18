@@ -71,9 +71,9 @@ tokenizer = load(open('tokenizer.pkl', 'rb'))
 # pre-define the max sequence length (from training)
 max_length = 34
 # load the model
-model = load_model('model-ep002-loss3.245-val_loss3.612.h5')
+model = load_model('model_0.h5')
 # load and prepare the photograph
-photo = extract_features('example.jpg')
+photo = extract_features('soccer_player.jpg')
 # generate description
 description = generate_desc(model, tokenizer, photo, max_length)
 print(description)

@@ -2,50 +2,15 @@
 <html lang="en">
 
 <head>
-    <style>
-        input {
-            text-align: center;
-            font-family: Georgia
-        }
-
-        button {
-            color: lightgray;
-        }
-
-        p,
-        div,
-        figure,
-        h3 {
-            text-align: center;
-            font-family: Georgia;
-            color: #494949;
-        }
-
-        body {
-            background-color: white;
-        }
-
-        .container {
-            text-align: center;
-            position: absolute;
-            background-color: #88e3ff;
-            font-family: Georgia;
-            top: 50%;
-            left: 50%;
-            -moz-transform: translateX(-50%) translateY(-50%);
-            -webkit-transform: translateX(-50%) translateY(-50%);
-            transform: translateX(-50%) translateY(-50%);
-        }
-    </style>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="../static/styles/Website.css" type = "text/css" />
 </head>
 
 <body class="container">
+    <div class="a">
     <h3>Prepare to Tweet your Image</h3>
     <figure>
         <img src="{{ image }}" alt="{{ caption }}" />
@@ -59,7 +24,7 @@
             placeholder = "If you would like to use a different caption, please enter it here" value="{{ caption }}"/>
         <br />
         <br />
-        <button type=" submit" class="btn btn-outline-dark btn-sm"> Send Tweet </button>
+        <button type="submit" class="btn btn-light btn-sm" > Send Tweet </button>
     </form>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -71,6 +36,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+        </div>
 </body>
 
 </html>

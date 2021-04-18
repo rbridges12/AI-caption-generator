@@ -143,5 +143,6 @@ Flickr8k_Dataset/
 Flickr8k_text.zip
 Flickr8k_text/
 features.pkl
+tokenizer.pkl
 *.h5
 website/static/uploads/*

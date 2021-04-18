@@ -2,69 +2,42 @@
 <html lang="en">
 
 <head>
-    <style>
-        input {
-            text-align: center;
-            font-family: Georgia
-        }
-        button {
-            color: lightgray;
-        }
-        p, div, form, h3 {
-            text-align: center; 
-            font-family: Georgia; 
-            color: #494949;
-        }
-        body {
-            background-color: white;
-        }
-        .container {
-            position: absolute;
-            background-color: #88e3ff;
-            font-family: Georgia; 
-            top: 50%;
-            left: 50%;
-            -moz-transform: translateX(-50%) translateY(-50%);
-            -webkit-transform: translateX(-50%) translateY(-50%);
-            transform: translateX(-50%) translateY(-50%);
-        }
-        div.a {
-            text-align: center;
-        }
-    
-    </style>
-    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/styles/Website.css" type="text/css" />
 
 </head>
 
-<body class = "container">
+<body class="container">
     <div class="a">
         <h3>Upload the image to be captioned </h3>
-        <form action="/file_upload" , method="post" , enctype="multipart/form-data">
-                <div id = "prompt">
-                    Pick a submit option
+        <form action="/file_upload" method="post" enctype="multipart/form-data">
+            <div id="prompt">
+                Pick a submit option
+            </div>
+            <br />
+            File <input type="radio" name="fileType" value="File" onclick="getFile()" require="require" />
+            URL <input type="radio" name="fileType" value="URL" onclick="getUrl()" require="require" />
+            <br />
+            <br />
+            <div id="file" style="display:none">
+                <div class="input-file-container">
+                    <input class="input-file" id="my-file" type="file">
+                    <label tabindex="0" for="my-file" class="input-file-trigger">Select a file...</label>
                 </div>
-                <br/>
-                File <input type = "radio" name = "fileType" value = "File" onclick = "getFile()" require = "require" />
-                URL <input type = "radio" name = "fileType" value = "URL" onclick = "getUrl()" require = "require" />
-                <br />
-                <br />
-                <div id = "file" style = "display:none" >
-                     <input type = "file" name = "image" />
-                </div>
-                <div id = "url" style = "display:none" >
-                    <input type = "url" size = 25 name = "image" placeholder = "Enter your URL here"/>
-                </div>
-                <br />
-                <div id = "Upload" style = "display:none" >        
-                    <button type="submit" style = "border-color: black; border:1px" class="btn btn-light btn-sm" > Upload </button>
-                </div>
+                <p class="file-return"></p>
+            </div>
+            <div id="url" style="display:none">
+                <input type="url" size=25 name="image" placeholder="Enter your URL here" />
+            </div>
+            <br />
+            <div id="Upload" style="display:none">
+                <button type="submit" style="font:gray" class="btn btn-light btn-sm"> Upload </button>
+            </div>
         </form>
-     </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -75,20 +48,51 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+    <!-- display flash error messages -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <h>{{ message }}</h>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}
 </body>
+
 </html>
 
 <script>
-function getFile() {
-    $("#file").show()
-    $("#url").hide()
-    $("#Upload").show()
-    $("#prompt").hide()
-};
-function getUrl() {
-    $("#url").show()
-    $("#file").hide()
-    $("#Upload").show()
-    $("#prompt").hide()
-}
+    function getFile() {
+        $("#file").show()
+        $("#url").hide()
+        $("#Upload").show()
+        $("#prompt").hide()
+    };
+    function getUrl() {
+        $("#url").show()
+        $("#file").hide()
+        $("#Upload").show()
+        $("#prompt").hide()
+    }
+     document.querySelector("html").classList.add('js');
+
+        var fileInput = document.querySelector(".input-file"),
+            button = document.querySelector(".input-file-trigger"),
+            the_return = document.querySelector(".file-return");
+
+        button.addEventListener("keydown", function (event) {
+            if (event.keyCode == 13 || event.keyCode == 32) {
+                fileInput.focus();
+            }
+        });
+        button.addEventListener("click", function (event) {
+            fileInput.focus();
+            return false;
+        });
+        fileInput.addEventListener("change", function (event) {
+            the_return.innerHTML = this.value;
+        });
 </script>
