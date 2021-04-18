@@ -7,14 +7,10 @@ import tweepy
 from captionAI.caption_gen import caption_generator
 import secrets
 
-# TODO: save model files to google drive
 UPLOADS_FOLDER = 'static/uploads/'
 TOKENIZER_PATH = 'captionAI/models/tokenizer.pkl'
 MODEL_PATH = 'captionAI/models/model_19.h5'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-
-print(secrets.API_KEY, secrets.API_SECRET_KEY,
-      secrets.ACCESS_TOKEN, secrets.ACCESS_TOKEN_SECRET)
 
 
 generator = caption_generator(TOKENIZER_PATH, MODEL_PATH)
@@ -94,7 +90,6 @@ def uploaded_file(filename):
     captionUpper = caption[0].upper() + caption[1:]
     return render_template('tweetImage.html', image='/'+image_path, caption=captionUpper)
 
-# TODO: get URL of tweet
 
 
 @app.route('/tweet_confirmation', methods=['POST'])
@@ -108,7 +103,6 @@ def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# TODO: fix file deletion
 
 
 def tweet(image, caption):
@@ -120,13 +114,13 @@ def tweet(image, caption):
 
     api = tweepy.API(auth)
 
-    '''
-    try:
-        api.verify_credentials()
-        print("Authentication OK")
-    except:
-        print("Error during authentication")
-    '''
+    # '''
+    # try:
+    #     api.verify_credentials()
+    #     print("Authentication OK")
+    # except:
+    #     print("Error during authentication")
+    # '''
 
     media = api.media_upload(image)  # Image file
 
