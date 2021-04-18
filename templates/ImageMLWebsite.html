@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+    
 
 <head>
     <meta charset="utf-8">
@@ -7,7 +8,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/styles/Website.css" type="text/css" />
-
 </head>
 
 <body class="container">
@@ -22,15 +22,11 @@
             URL <input type="radio" name="fileType" value="URL" onclick="getUrl()" require="require" />
             <br />
             <br />
-            <div id="file" style="display:none">
-                <div class="input-file-container">
-                    <input style="display:none" class="input-file" id="my-file" type="file" />
-                    <label tabindex="0" for="my-file" class="input-file-trigger">Select a file...</label>
-                </div>
-                <p class="file-return"></p>
+            <div id="file" style = "display:none">
+                <input type="file" name = "image" />
             </div>
             <div id="url" style="display:none">
-                <input type="url" size=25 name="image" placeholder="Enter your URL here" />
+                <input type="url" size=40 name="image" placeholder="Enter your URL here" />
             </div>
             <br />
             <div id="Upload" style="display:none">
@@ -72,25 +68,7 @@
             $("#file").hide()
             $("#Upload").show()
             $("#prompt").hide()
-        }
-        document.querySelector("html").classList.add('js');
-
-        var fileInput = document.querySelector(".input-file"),
-            button = document.querySelector(".input-file-trigger"),
-            the_return = document.querySelector(".file-return");
-
-        button.addEventListener("keydown", function (event) {
-            if (event.keyCode == 13 || event.keyCode == 32) {
-                fileInput.focus();
-            }
-        });
-        button.addEventListener("click", function (event) {
-            fileInput.focus();
-            return false;
-        });
-        fileInput.addEventListener("change", function (event) {
-            the_return.innerHTML = this.value;
-        });
+        };
     </script>
 </body>
 

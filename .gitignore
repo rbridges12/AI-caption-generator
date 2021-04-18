@@ -145,4 +145,7 @@ Flickr8k_text/
 features.pkl
 tokenizer.pkl
 *.h5
-website/static/uploads/*
+static/uploads/*
+captionAI/InstaNY100K/*
+captionAI/test_images/*
+captionAI/InstaNY100K.zip

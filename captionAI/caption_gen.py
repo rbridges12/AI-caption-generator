@@ -68,21 +68,21 @@ def generate_desc(model, tokenizer, photo, max_length):
 
 class caption_generator:
 
-    def __init__(self):
+    def __init__(self, tokenizer_path, model_path):
 
         # load the tokenizer
-        self.tokenizer = load(open('tokenizer.pkl', 'rb'))
+        self.tokenizer = load(open(tokenizer_path, 'rb'))
 
         # pre-define the max sequence length (from training)
         self.max_length = 34
 
         # load the model
-        self.model = load_model('model_1.h5')
+        self.model = load_model(model_path)
 
     def get_caption(self, image_name):
 
         # load and prepare the photograph
-        photo = extract_features('school.jpeg')
+        photo = extract_features(image_name)
 
         # generate description
         description = generate_desc(self.model, self.tokenizer, photo, self.max_length)
