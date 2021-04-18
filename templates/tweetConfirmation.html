@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+    <title>Tweet Confirmation</title>
+    <meta name = "robots" content = "nofollow" />
+    <meta http-equiv = "pragma" content = "no-cache" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -11,13 +14,12 @@
 
 <body>
     <div class="a">
-    <h3>Your Image and Caption has been Tweeted</h3>
-    <p>It can be found at:</p>
-    <br />
-    <p>{{ newUrl }}</p>
-    <iframe width = "450" height = "250" src = "{{ newUrl }}"></iframe>
-    <br />
-    <button class = "btn btn-dark btn-sm" href = "/https.uiowa.herokuapp.com/">Back to Image Upload</button>
+        <h3>Your Image and Caption has been Tweeted</h3>
+        <br />
+        <button href = "/" class = "btn-light btn-sm" style = "background-color: #f3f4ed; border: 2px; color: #536162">Go back to image uploader</button>
+        <br />
+        <a class="twitter-timeline" href="https://twitter.com/Bot2021U?ref_src=twsrc%5Etfw%22%3E" style = "width: 600vw; height: auto;">Tweets by Bot2021U</a> 
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
 </body>
 </html>

@@ -1,15 +1,21 @@
+import mimetypes
 from flask import Flask, render_template, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 import os
 from urllib.request import urlopen
 import tweepy
 from captionAI.caption_gen import caption_generator
+import secrets
 
 # TODO: save model files to google drive
 UPLOADS_FOLDER = 'static/uploads/'
-TOKENIZER_PATH = 'captionAI/tokenizer.pkl'
-MODEL_PATH = 'captionAI/model_1.h5'
+TOKENIZER_PATH = 'captionAI/models/tokenizer.pkl'
+MODEL_PATH = 'captionAI/models/model_19.h5'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
+print(secrets.API_KEY, secrets.API_SECRET_KEY,
+      secrets.ACCESS_TOKEN, secrets.ACCESS_TOKEN_SECRET)
+
 
 generator = caption_generator(TOKENIZER_PATH, MODEL_PATH)
 app = Flask(__name__)
@@ -31,7 +37,12 @@ def file_upload():
 
     # if a URL was provided, download and save it
     if request.form['fileType'] == 'URL':
+
         url = request.form['image']
+        if not check_url(url):
+            flash("Could not read URL")
+            return redirect('/')
+
         res = urlopen(url)
         filename = url.replace('.', '') + '.jpg'
         # TODO: fix this
@@ -64,12 +75,25 @@ def file_upload():
 # TODO: resize image to fit
 
 
+def check_url(url):
+    try:
+        res = urlopen(url)
+        message = res.info()
+        return message not in ('image/png', 'image/jpeg', 'image/jpg')
+    except:
+        return False
+
+
 @app.route('/uploaded_file/<filename>')
 def uploaded_file(filename):
     global image_path
     image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     caption = generator.get_caption(image_path)
-    return render_template('tweetImage.html', image=image_path, caption=caption)
+    caption = caption + " #HackUIowa"
+    caption = caption.replace('in red shirt', '')
+    caption = caption.replace('man', 'person')
+    captionUpper = caption[0].upper() + caption[1:]
+    return render_template('tweetImage.html', image='/'+image_path, caption=captionUpper)
 
 # TODO: get URL of tweet
 
@@ -77,7 +101,6 @@ def uploaded_file(filename):
 @app.route('/tweet_confirmation', methods=['POST'])
 def tweet_confirmation():
     caption = request.form.get('caption')
-    # image = request.form.get('image')
     url = tweet(image_path, caption)
     return render_template('tweetConfirmation.html', url=url)
 
@@ -86,23 +109,33 @@ def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# TODO: fix file deletion
 
-# TODO: hide keys in secret file
+
 def tweet(image, caption):
-    auth = tweepy.OAuthHandler(
-        "s6j20sJFJRabXx5ImyM0QEEaD", "N6MmSc19jfCqESX3wAInJUhLEW0oidUptDiMNF6XgPahgqnSYg")
-    auth.set_access_token("2733437449-7tAXSHbYjQJapC9ITqxLmsDtHCcHcwDhL6AJ0Lf",
-                          "ih6BSfqlTAV4eYE5MzrzBeqhYXZMkbWSYQ7FclXATKUen")
+    auth = tweepy.OAuthHandler(secrets.API_KEY, secrets.API_SECRET_KEY)
+    auth.set_access_token(secrets.ACCESS_TOKEN, secrets.ACCESS_TOKEN_SECRET)
 
-    # imagePath = os.path.join(
-    #     app.config['UPLOAD_FOLDER'], image)
+    if image and image[1] == '/':
+        image = image[1:]
+
     api = tweepy.API(auth)
-    print(image, caption)
+
+    '''
+    try:
+        api.verify_credentials()
+        print("Authentication OK")
+    except:
+        print("Error during authentication")
+    '''
+
     media = api.media_upload(image)  # Image file
 
     post_result = api.update_status(status=caption, media_ids=[media.media_id])
 
     if os.path.exists(image_path):
         os.remove(image_path)
-    newUrl = "http://twitter.com/mherman05/status/" + str(post_result.id)
+    print("Image Path", image_path)
+
+    newUrl = "https://twitter.com/Bot2021U/status/" + str(post_result.id)
     return newUrl

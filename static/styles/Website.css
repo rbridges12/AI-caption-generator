@@ -24,6 +24,15 @@ p, div, form, h3 {
     text-align: center;
     font-family: Georgia;
 }
+img {
+    width: 600vw; 
+    max-width: 800px; 
+    height: auto; 
+    border: 10px; 
+    border-color: #f3f4ed;
+    background-color: #f3f4ed;
+    padding: 10px;
+}
 .container {
     background-color: #536162;
     color: #f3f4ed;
@@ -38,6 +47,6 @@ p, div, form, h3 {
 }
 .a {
     position: relative;
-    top: 30%  
+    top: 30%;
 }
 

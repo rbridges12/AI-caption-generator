@@ -65,7 +65,6 @@ def generate_desc(model, tokenizer, photo, max_length):
             break
     return in_text[9:-7]
 
-
 class caption_generator:
 
     def __init__(self, tokenizer_path, model_path):
@@ -88,3 +87,7 @@ class caption_generator:
         description = generate_desc(self.model, self.tokenizer, photo, self.max_length)
         # print(description)
         return description
+
+# gen = caption_generator('small_tokenizer.pkl', 'insta_models/model_0.h5')
+# description = gen.get_caption('test_images/car_driving.jpg')
+# print(description)

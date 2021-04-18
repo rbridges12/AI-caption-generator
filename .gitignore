@@ -148,4 +148,7 @@ tokenizer.pkl
 static/uploads/*
 captionAI/InstaNY100K/*
 captionAI/test_images/*
-captionAI/InstaNY100K.zip
+captionAI/zip_files/*
+captionAI/insta_small_dataset/*
+captionAI/insta_models/*
+# secrets.py

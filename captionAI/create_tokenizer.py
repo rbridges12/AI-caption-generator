@@ -72,13 +72,13 @@ def create_tokenizer(descriptions):
 
 
 # load training dataset (6K)
-filename = 'Flickr8k_text/Flickr_8k.trainImages.txt'
+filename = 'insta_small_dataset/train_images.txt'
 train = load_set(filename)
 print('Dataset: %d' % len(train))
 # descriptions
-train_descriptions = load_clean_descriptions('descriptions.txt', train)
+train_descriptions = load_clean_descriptions('small_descriptions.txt', train)
 print('Descriptions: train=%d' % len(train_descriptions))
 # prepare tokenizer
 tokenizer = create_tokenizer(train_descriptions)
 # save the tokenizer
-dump(tokenizer, open('tokenizer.pkl', 'wb'))
+dump(tokenizer, open('small_tokenizer.pkl', 'wb'))
