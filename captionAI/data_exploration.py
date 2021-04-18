@@ -1,6 +1,4 @@
 import os
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
 from shutil import copyfile
 
 directory = 'InstaNY100K/InstaNY100K/img_resized/newyork'
