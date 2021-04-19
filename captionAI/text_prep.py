@@ -80,7 +80,7 @@ def save_descriptions(descriptions, filename):
 	file.close()
 
 
-filename = 'insta_small_dataset/captions'
+filename = 'Flickr8k_text'
 # load descriptions
 doc = load_doc(filename)
 # parse descriptions

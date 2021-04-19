@@ -151,4 +151,9 @@ captionAI/test_images/*
 captionAI/zip_files/*
 captionAI/insta_small_dataset/*
 captionAI/insta_models/*
-# secrets.py
+secrets.py
+
+# keep one empty file in the uploads folder so the folder gets added to github
+!static/uploads/empty.jpg
+!captionAI/models/model_19.h5
+!captionAI/models/tokenizer.pkl

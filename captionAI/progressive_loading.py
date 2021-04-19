@@ -163,14 +163,14 @@ def data_generator(descriptions, photos, tokenizer, max_length, vocab_size):
 
 
 # load training dataset (6K)
-filename = 'insta_small_dataset/train_images.txt'
+filename = 'Flickr8k_text/Flickr_8k.trainImages.txt'
 train = load_set(filename)
 print('Dataset: %d' % len(train))
 # descriptions
-train_descriptions = load_clean_descriptions('small_descriptions.txt', train)
+train_descriptions = load_clean_descriptions('descriptions.txt', train)
 print('Descriptions: train=%d' % len(train_descriptions))
 # photo features
-train_features = load_photo_features('small_features.pkl', train)
+train_features = load_photo_features('features.pkl', train)
 print('Photos: train=%d' % len(train_features))
 # prepare tokenizer
 tokenizer = create_tokenizer(train_descriptions)

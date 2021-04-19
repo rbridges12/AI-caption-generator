@@ -152,11 +152,11 @@ def evaluate_model(model, descriptions, photos, tokenizer, max_length):
 
 
 # load training dataset (6K)
-filename = 'insta_small_dataset/train_images.txt'
+filename = 'Flickr8k_text/Flickr_8k.trainImages.txt'
 train = load_set(filename)
 print('Dataset: %d' % len(train))
 # descriptions
-train_descriptions = load_clean_descriptions('small_descriptions.txt', train)
+train_descriptions = load_clean_descriptions('descriptions.txt', train)
 print('Descriptions: train=%d' % len(train_descriptions))
 # prepare tokenizer
 tokenizer = create_tokenizer(train_descriptions)
@@ -169,14 +169,14 @@ print('Description Length: %d' % max_length)
 # prepare test set
 
 # load test set
-filename = 'insta_small_dataset/train_images.txt'
+filename = 'Flickr8k_text/Flickr_8k.testImages.txt'
 test = load_set(filename)
 print('Dataset: %d' % len(test))
 # descriptions
-test_descriptions = load_clean_descriptions('small_descriptions.txt', test)
+test_descriptions = load_clean_descriptions('descriptions.txt', test)
 print('Descriptions: test=%d' % len(test_descriptions))
 # photo features
-test_features = load_photo_features('small_features.pkl', test)
+test_features = load_photo_features('features.pkl', test)
 print('Photos: test=%d' % len(test_features))
 
 # load the model

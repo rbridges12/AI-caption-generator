@@ -61,9 +61,9 @@ def extract_features(directory):
 # extract features from all images
 # make img_resized smaller
 # directory = 
-directory = 'insta_small_dataset/imgs'
+directory = 'Flickr8k_Dataset'
 features = extract_features(directory)
 print('Extracted Features: %d' % len(features))
 # save to file
-dump(features, open('small_features.pkl', 'wb'))
+dump(features, open('features.pkl', 'wb'))
 # load doc into memory
